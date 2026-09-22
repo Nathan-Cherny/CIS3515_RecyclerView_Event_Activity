@@ -14,7 +14,9 @@ class NumberDisplayAdapter (private val numbers: Array<Int>, private val callBac
     // TODO (Step 1b: Invoke lambda via onClickListener)
     inner class NumberViewHolder (layout: View) : RecyclerView.ViewHolder (layout) {
         // enumerate views inside layout
-        val textView = layout.findViewById<TextView>(R.id.textView)
+        val textView = layout.findViewById<TextView>(R.id.textView).apply{
+            setOnClickListener { callBack(numbers[bindingAdapterPosition]) }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
@@ -29,7 +31,6 @@ class NumberDisplayAdapter (private val numbers: Array<Int>, private val callBac
 
     override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
         holder.textView.text = numbers[position].toString()
-        holder.textView.setOnClickListener { callBack(numbers[position]) }
     }
 
 }
